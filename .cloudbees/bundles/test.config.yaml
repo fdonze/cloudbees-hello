@@ -1,0 +1,2 @@
+bundleConfigApi: "0.1"
+source: github.com/cloudbees/some-example-bundle:main
