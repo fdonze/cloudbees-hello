@@ -1,0 +1,22 @@
+workflowApi: 0.1
+"on":
+  bundle: { }
+jobs:
+  greeter:
+    steps:
+      - uses: cloudbees/shell-widget
+        # the using ref can be:
+        # a full ref to a git repo, for now we always assume it's on github.com and reserve github.com/ as a prefix
+        # after the ref we include a : and or an @
+        # the : is followed by a branch or tag name
+        # the @ is followed by the commit hash
+        # examples:
+        #   cloudbees/shell-widget                                         (the head commit of the default branch)
+        #   cloudbees/shell-widget:v1                                      (a tag)
+        #   cloudbees/shell-widget:main                                    (a branch)
+        #   cloudbees/shell-widget:main@cafebabedeadbeefcafebabedeadbeef   (a commit hash (branch is ignored except for suggesting updates)
+        #   cloudbees/shell-widget@cafebabedeadbeefcafebabedeadbeef        (a commit hash no update suggested)
+        #   github.com/cloudbees/shell-widget:v1                           (being more specific about where the repo is)
+
+        with:
+          cmd: echo hello world....
