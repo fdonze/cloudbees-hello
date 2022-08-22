@@ -2,8 +2,8 @@
 # source: github.com/fdonze/hello-world-bundle:main
 
 resources:
-  - from: cloudbees/springboot-app-test/src/main/java/com/example/restservice/
-    to: res
+  - from: cloudbees/springboot-app-test/src/
+    to: /res/
   - from: cloudbees/springboot-app-test/src/test/java/com/example/restservice/GreetingControllerTests.java
     to: .
   - from: cloudbees/springboot-app-test/src/main/java/com/example/restservice/Greeting.java
