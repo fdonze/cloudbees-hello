@@ -1,5 +1,5 @@
 # Poke
-# source: github.com/fdonze/hello-world-bundle:main
+source: github.com/fdonze/hello-world-bundle:main
 
 resources:
   - from: cloudbees/springboot-app-test/src/
