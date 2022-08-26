@@ -1,0 +1,17 @@
+bundleApi: 0.1
+config:
+  cmd:
+    type: string
+    default: "echo hello"
+workflows:
+  hello:
+    source: github.com/fdonze/hello-world-bundle@main
+    on:
+      github_push: { }
+      github_pull_request: { }
+    config:
+      go-cmd: ${{ config.cmd }}
+resources:
+  - from: github.com/fdonze/hello-world-bundle/README.md@main
+    to: /
+    update: true
