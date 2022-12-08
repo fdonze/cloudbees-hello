@@ -1,4 +1,3 @@
-
 cloudbees-hello
 ===============
 
