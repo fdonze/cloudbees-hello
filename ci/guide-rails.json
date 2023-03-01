@@ -1,0 +1,101 @@
+{
+	"metadata": {
+		"version": 1
+	},
+	"application": {
+		"name": "simple-hello-world",
+		"language": "JAVA_MAVEN",
+		"artifact_store": {
+			"repositories": null
+		}
+	},
+	"pipeline": {
+		"segments": [
+			{
+				"name": "Build",
+				"segment_type": "build",
+				"exit_actions": {},
+				"properties": [
+					{
+						"name": "gradle.user.home",
+						"value": "${SEGMENT_BASE_DIR}/cache/.gradle",
+						"description": "GRADLE_USER_HOME is set to ${SEGMENT_BASE_DIR}/cache/.gradle by default, when caching is enabled. Caches are maintained on the worker where your build gets allocated. For a new worker assigned to the build, the cache will be re-created"
+					},
+					{
+						"name": "ivy.defaultCacheDir",
+						"value": "${SEGMENT_BASE_DIR}/cache/.ivy",
+						"description": "ivy cache directory is set to ${SEGMENT_BASE_DIR}/cache/.ivy by default, when caching is enabled. Caches are maintained on the worker where your build gets allocated. For a new worker assigned to the build, the cache will be re-created"
+					},
+					{
+						"name": "maven.repo.local",
+						"value": "${SEGMENT_BASE_DIR}/cache/.m2",
+						"description": "maven local repository is set to ${SEGMENT_BASE_DIR}/cache/.m2 by default, when caching is enabled. Caches are maintained on the worker where your build gets allocated. For a new worker assigned to the build, the cache will be re-created"
+					}
+				],
+				"deployment_strategy": {},
+				"application_init": {},
+				"packages": [
+					{
+						"name": "((application.name))",
+						"downloads": [],
+						"files": [
+							"((application.name))*"
+						]
+					}
+				],
+				"instance_tags": [
+					{
+						"name": "application.name",
+						"value": "((application.name))"
+					}
+				],
+				"cache_info": {
+					"paths": [
+						"((gradle.user.home))",
+						"((ivy.defaultCacheDir))",
+						"((maven.repo.local))"
+					]
+				},
+				"tasks": [
+					{
+						"name": "simple-hello-world",
+						"steps": [
+							{
+								"name": "compile",
+								"definition": "Run the maven compile command",
+								"command": "mvn compile",
+								"properties": null
+							},
+							{
+								"name": "package",
+								"definition": "Run the maven package command",
+								"command": "mvn package",
+								"properties": null
+							},
+							{
+								"name": "copy-jar",
+								"definition": "Copy final JAR to expected location",
+								"command": "cp -f target/*.[jwe]ar **/target/*.[jwe]ar .",
+								"properties": null
+							}
+						],
+						"docker_options": {}
+					}
+				]
+			}
+		],
+		"exit_actions": {},
+		"default_properties": [],
+		"deployment_files": [],
+		"application_init": {},
+		"releases": [
+			{
+				"name": "consul",
+				"version": "latest"
+			}
+		]
+	},
+	"organization": {
+		"orgname": "localOrg"
+	}
+}
